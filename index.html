@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ishaan Patel | ML Engineer & Web3 Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0a0a0f;
+            --secondary-bg: #1a1a2e;
+            --accent-bg: #16213e;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8b8;
+            --accent-color: #00d4ff;
+            --secondary-accent: #ff6b6b;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --shadow-glow: 0 0 30px rgba(0, 212, 255, 0.3);
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 107, 107, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(79, 172, 254, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 70%, rgba(0, 255, 127, 0.1) 0%, transparent 50%);
+            animation: float 25s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            33% { transform: translateY(-30px) rotate(120deg) scale(1.1); }
+            66% { transform: translateY(-15px) rotate(240deg) scale(0.9); }
+        }
+
+        /* Animated grid overlay */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.3) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate, titlePulse 4s ease-in-out infinite;
+            position: relative;
+        }
+
+        .hero-content h1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            animation: shine 3s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes glow {
+            from { 
+                filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+                text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            }
+            to { 
+                filter: drop-shadow(0 0 40px rgba(0, 212, 255, 0.8));
+                text-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.7);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 90%;
+            height: 400px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: white;
+            box-shadow: var(--shadow-card);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .about-text h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--secondary-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .project-image {
+            height: 200px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: var(--accent-bg);
+            color: var(--accent-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--accent-color);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .skill-category h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .skill-item::before {
+            content: '▶';
+            color: var(--accent-color);
+            margin-right: 1rem;
+        }
+
+        /* Achievements Section */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .achievement-card {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .achievement-title {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .achievement-org {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .achievement-desc {
+            color: var(--text-secondary);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+        }
+
+        .contact-form {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent-bg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .submit-btn {
+            background: var(--gradient-accent);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Ishaan Patel</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Ishaan Patel</h1>
+                <p class="hero-subtitle">Rising Senior at Schaumburg High School</p>
+                <p class="hero-description">
+                    Building the future through Machine Learning, Web3 Applications, and Data Science. 
+                    Currently creating revolutionary tools at NERO Chain while researching Pascal's triangle in future data integration.
+                </p>
+                <a href="#projects" class="cta-button">Explore My Work</a>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">About Me</h2>
+                <div class="about-content fade-in">
+                    <div class="about-image">
+                        <IMG src="IMG_0701.jpg" style="width:3.5em; height:4.2em;" />
+                    </div>
+                    <div class="about-text">
+                        <h3>ML Engineer & Web3 Developer</h3>
+                        <p>
+                            I'm a passionate rising senior at Schaumburg High School,
+                            specializing in Machine Learning and Web3 applications. As an intern at NERO Chain, 
+                            I'm creating revolutionary tools using cutting-edge NERO Chain technology.
+                            My journey spans from Public Forum Debate to ML research where I not only demonstrate leadership, but also a drive to innovate.
+                            I believe in the power of technology to transform lives and create meaningful impact.
+                            When I'm not coding, you'll find me on the tennis court, watching the NFL, or cooking delicious food.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="stats fade-in">
+                    <div class="stat-card">
+                        <div class="stat-number">4.0</div>
+                        <div class="stat-label">Unweighted GPA</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5.148</div>
+                        <div class="stat-label">Weighted GPA</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Leadership Roles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Years of Coding Experience</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Featured Projects</h2>
+                <div class="projects-grid fade-in">
+                    <div class="project-card">
+                        <div class="project-image">🧠</div>
+                        <div class="project-content">
+                            <h3 class="project-title">Debate ML Model</h3>
+                            <p class="project-description">
+                                99% accurate ML model designed to provide strategic insights for recruitment. 
+                                Currently in development phase with promising preliminary results.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Machine Learning</span>
+                                <span class="tech-tag">NLP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">💰</div>
+                        <div class="project-content">
+                            <h3 class="project-title">SpendSense</h3>
+                            <p class="project-description">
+                                Intelligent personal finance manager with expense categorization and 
+                                budgeting features. Helps users make smarter financial decisions.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">HTML/CSS</span>
+                                <span class="tech-tag">Supabase</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">🎯</div>
+                        <div class="project-content">
+                            <h3 class="project-title">D211 Grade Calculator</h3>
+                            <p class="project-description">
+                                Comprehensive grade calculation tool for District 211 students, featuring GPA tracking and 
+                                grade calculation/conversion from Infinite Campus.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">HTML/CSS</span>
+                                <span class="tech-tag">React</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">🌐</div>
+                        <div class="project-content">
+                            <h3 class="project-title">Code211 Website</h3>
+                            <p class="project-description">
+                                Co-created the official Code211 hackathon website with an advanced registration system, 
+                                real-time updates, and seamless management capabilities.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">Firebase</span>
+                                <span class="tech-tag">Tailwind</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">🎭</div>
+                        <div class="project-content">
+                            <h3 class="project-title">Stage Fright Website</h3>
+                            <p class="project-description">
+                                Award-winning website design that secured 2nd place at BPA State. 
+                                Features innovative UI/UX design and interactive elements.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">HTML/CSS</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Firebase</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">🔺</div>
+                        <div class="project-content">
+                            <h3 class="project-title">Micro-Tip Widget</h3>
+                            <p class="project-description">
+                                Built a gasless Web3 tipping widget on NERO Chain; empowered creators to earn seamlessly, enhancing UX and blockchain accessibility.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Ethers</span>
+                                <span class="tech-tag">NERO SDK</span>
+                                <span class="tech-tag">React</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Technical Arsenal</h2>
+                <div class="skills-container fade-in">
+                    <div class="skill-category">
+                        <h3>Languages</h3>
+                        <ul class="skill-list">
+                            <li class="skill-item">TypeScript</li>
+                            <li class="skill-item">Python</li>
+                            <li class="skill-item">Java</li>
+                            <li class="skill-item">HTML</li>
+                            <li class="skill-item">CSS</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Frontend</h3>
+                        <ul class="skill-list">
+                            <li class="skill-item">React</li>
+                            <li class="skill-item">Next.js</li>
+                            <li class="skill-item">Tailwind CSS</li>
+                            <li class="skill-item">Responsive Design</li>
+                            <li class="skill-item">Modern UI/UX</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Backend</h3>
+                        <ul class="skill-list">
+                            <li class="skill-item">Node.js</li>
+                            <li class="skill-item">Django</li>
+                            <li class="skill-item">Supabase</li>
+                            <li class="skill-item">Firebase</li>
+                            <li class="skill-item">SQL</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>AI & Machine Learning</h3>
+                        <ul class="skill-list">
+                            <li class="skill-item">Scikit-learn</li>
+                            <li class="skill-item">TensorFlow</li>
+                            <li class="skill-item">PyTorch</li>
+                            <li class="skill-item">NumPy</li>
+                            <li class="skill-item">Pandas</li>
+                            <li class="skill-item">OpenCV</li>
+                            <li class="skill-item">NLP</li>
+                            <li class="skill-item">Deep Learning</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Web3 & Blockchain</h3>
+                        <ul class="skill-list">
+                            <li class="skill-item">NERO Chain Platform</li>
+                            <li class="skill-item">Ethers.js</li>
+                            <li class="skill-item">Web3.js</li>
+                            <li class="skill-item">Smart Contracts</li>
+                            <li class="skill-item">DeFi Applications</li>
+                            <li class="skill-item">Blockchain Integration</li>
+                            <li class="skill-item">Cryptocurrency</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Data Science</h3>
+                        <ul class="skill-list">
+                            <li class="skill-item">Data Analysis</li>
+                            <li class="skill-item">Statistical Modeling</li>
+                            <li class="skill-item">Data Visualization</li>
+                            <li class="skill-item">Predictive Analytics</li>
+                            <li class="skill-item">Research Methodology</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Achievements & Leadership</h2>
+                <div class="achievements-grid fade-in">
+                    <div class="achievement-card">
+                        <h3 class="achievement-title">Academic Excellence</h3>
+                        <p class="achievement-org">Schaumburg High School</p>
+                        <p class="achievement-desc">Achieved a 1500+ SAT score and maintained a 5.148 Weighted GPA while balancing multiple leadership positions</p>
+                    </div>
+
+                    <div class="achievement-card">
+                        <h3 class="achievement-title">Code211 Co-Director</h3>
+                        <p class="achievement-org">District 211</p>
+                        <p class="achievement-desc">Co-revived and directing the premier coding competition of D211; fostering engagement of a majority minority event through 250+ hours of planning</p>
+                    </div>
+
+                    <div class="achievement-card">
+                        <h3 class="achievement-title">NHS Co-President</h3>
+                        <p class="achievement-org">National Honor Society</p>
+                        <p class="achievement-desc">Leading academic excellence initiatives and community service programs of a 100+ member school organization</p>
+                    </div>
+
+                    <div class="achievement-card">
+                        <h3 class="achievement-title">Debate Team Co-Captain</h3>
+                        <p class="achievement-org">Schaumburg High School</p>
+                        <p class="achievement-desc">Leading competitive debate team through research, meetings, state competitions, and student mentorship</p>
+                    </div>
+
+                    <div class="achievement-card">
+                        <h3 class="achievement-title">NERO Chain Intern</h3>
+                        <p class="achievement-org">NERO Chain</p>
+                        <p class="achievement-desc">Developing revolutionary blockchain applications using cutting-edge Web3 technology from NERO Chain</p>
+                    </div>
+
+                    <div class="achievement-card">
+                        <h3 class="achievement-title">BPA National Qualifier</h3>
+                        <p class="achievement-org">Business Professionals of America</p>
+                        <p class="achievement-desc">State runner-up for Website Design Team with innovative Stage Fright website creation and design</p>
+                    </div>
+
+
+                    <div class="achievement-card">
+                        <h3 class="achievement-title">Tennis Player</h3>
+                        <p class="achievement-org">Student Athlete Leadership Team</p>
+                        <p class="achievement-desc">Only current tennis athlete on SALT; mentored 5 JV players and competed in varsity tournaments </p>
+                    </div>
+
+                    <div class="achievement-card">
+                        <h3 class="achievement-title">Data Science Research</h3>
+                        <p class="achievement-org">Independent Research</p>
+                        <p class="achievement-desc">Conducting cutting-edge research on Pascal's triangle integration in futuristic data applications</p>
+                    </div>
+                    <div class="achievement-card">
+                        <h3 class="achievement-title">Public Forum Co-Captain </h3>
+                        <p class="achievement-org">Schaumburg High School</p>
+                        <p class="achievement-desc">Co-revived dormant Public Forum team; led team to state competition; conducted research on current events</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Let's Connect</h2>
+                <div class="contact-content fade-in">
+                    <div class="contact-info">
+                        <h3 style="color: var(--text-primary); margin-bottom: 2rem;">Get In Touch</h3>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4 style="color: var(--text-primary);">Location</h4>
+                                <p style="color: var(--text-secondary);">Schaumburg, Illinois, USA</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <h4 style="color: var(--text-primary);">Email</h4>
+                                <p style="color: var(--text-secondary);">patelishaan3@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">💼</div>
+                            <div>
+                                <h4 style="color: var(--text-primary);">Status</h4>
+                                <p style="color: var(--text-secondary);">Open to Opportunities</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🚀</div>
+                            <div>
+                                <h4 style="color: var(--text-primary);">Interests</h4>
+                                <p style="color: var(--text-secondary);">ML & AI, Web3, Data Science</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <h3 style="color: var(--text-primary); margin-bottom: 2rem;">Send a Message</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ishaan Patel. Crafted with passion for innovation and excellence.</p>
+            <p style="margin-top: 1rem; color: var(--accent-color);">Building the future, one algorithm at a time.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Dynamic navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(26, 26, 46, 0.95)';
+            } else {
+                nav.style.background = 'rgba(26, 26, 46, 0.9)';
+            }
+        });
+
+        // Form submission handling
+        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.textContent = 'Message Sent! ✓';
+                submitBtn.style.background = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
+                
+                // Reset form
+                this.reset();
+                
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.style.background = '';
+                }, 2000);
+            }, 1500);
+        });
+
+        // Add floating particles effect
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = 'rgba(0, 212, 255, 0.6)';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '-1';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            
+            document.body.appendChild(particle);
+            
+            const animation = particle.animate([
+                { transform: 'translateY(0px)', opacity: 1 },
+                { transform: `translateY(-${window.innerHeight + 100}px)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'linear'
+            });
+            
+            animation.onfinish = () => particle.remove();
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 500);
+
+        // Add typing effect to hero subtitle
+        const subtitle = document.querySelector('.hero-subtitle');
+        const originalText = subtitle.textContent;
+        subtitle.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < originalText.length) {
+                subtitle.textContent += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        
+        // Start typing effect after page load
+        window.addEventListener('load', () => {
+            setTimeout(typeWriter, 1000);
+        });
+
+        // Add hover effects to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add glow effect to skills on hover
+        document.querySelectorAll('.skill-item').forEach(skill => {
+            skill.addEventListener('mouseenter', function() {
+                this.style.color = 'var(--accent-color)';
+                this.style.textShadow = '0 0 10px rgba(0, 212, 255, 0.5)';
+            });
+            
+            skill.addEventListener('mouseleave', function() {
+                this.style.color = 'var(--text-secondary)';
+                this.style.textShadow = 'none';
+            });
+        });
+
+        // Parallax effect for background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const bgAnimation = document.querySelector('.bg-animation');
+            bgAnimation.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    </script>
+</body>
+</html>
